@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.output-container {
+  background: rgb(36 41 46);
+  color: white;
+  width: 100%;
+}
+pre {
+  font-size: 14px;
+  padding: 10px 5px;
+}

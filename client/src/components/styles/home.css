@@ -1,0 +1,112 @@
+.App {
+  height: 100vh;
+  background: rgb(36 41 46);
+}
+header {
+  width: 100%;
+}
+.logo > img {
+  height: 50px;
+}
+.fullEditor {
+  display: flex;
+  min-width: 100vw;
+  min-height: 94vh;
+  background: rgb(36 41 46);
+}
+.btn {
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-68 {
+  background-color: #27ae60;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
+  color: #fff;
+  cursor: pointer;
+  font-family: Inter, -apple-system, system-ui, 'Segoe UI', Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  padding: 6px 15px;
+  transition: all 0.3s;
+  /* height: 30px; */
+}
+
+.button-68:hover {
+  background-color: #44b874;
+}
+
+.options {
+  background-color: rgb(51, 51, 52);
+  display: flex;
+  /* padding: 0 10px; */
+
+  justify-content: space-between;
+  height: 6vh;
+  width: 100%;
+}
+
+.outputWindow {
+  width: 50%;
+}
+.langHead {
+  padding: 10px 0 0 15px;
+  font-size: 12px;
+  font-weight: lighter;
+  color: white;
+  height: 35px;
+  width: 70px;
+  background-color: rgb(36 41 46);
+}
+
+.langSelect {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 0;
+  justify-content: space-around;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border-right: 1px grey solid;
+  background-color: rgb(51, 51, 52);
+  width: 3vw;
+}
+
+.langSelect input[type='radio'] {
+  display: none; /* Hide the actual radio input */
+}
+
+.radio-label {
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* fill: #27ae60; */
+}
+.radio-label path {
+  fill: #ffffff;
+}
+.radio-label path:hover {
+  fill: #ffffff;
+}
+.langSelect input[type='radio']:checked + .radio-label {
+  background-color: rgb(36 41 46);
+}
+.codewindow-main {
+  display: flex;
+}
+
+.codeEditor {
+  padding: 10px;
+}
+.editor-window {
+  border-right: 1px grey solid;
+  width: 50%;
+}
+.outputDisplay {
+  width: 50%;
+}
