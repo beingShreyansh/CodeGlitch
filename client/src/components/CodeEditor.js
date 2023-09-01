@@ -31,7 +31,6 @@ const CodeEditor = ({ value, onChange }) => {
         fontSize={16}
         editorProps={{ $blockScrolling: true }}
         width="100%"
-        height="90vh"
         wrapEnabled
         setOptions={{
           enableBasicAutocompletion: true,

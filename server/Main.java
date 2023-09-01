@@ -1,1 +1,1 @@
-console.gol(120+890)
+console.log("jo")

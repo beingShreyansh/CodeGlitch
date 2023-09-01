@@ -46,7 +46,7 @@ function Home() {
       <div className="App">
         <header>
           <div className="logo">
-            <img src={logo} className="App-logo" alt="logo" draggable="false" />
+            <img src={logo} className="App- logo" alt="logo" draggable="false" />
           </div>
         </header>
         <div className="fullEditor">

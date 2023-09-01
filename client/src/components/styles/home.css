@@ -1,18 +1,19 @@
 .App {
-  height: 100vh;
-  background: rgb(36 41 46);
+  max-height: 100vh;
+  background: #24292e;
+  overflow: hidden;
 }
-header {
-  width: 100%;
+.logo {
+  width: fit-content;
 }
+
 .logo > img {
   height: 50px;
 }
 .fullEditor {
   display: flex;
-  min-width: 100vw;
-  min-height: 94vh;
-  background: rgb(36 41 46);
+  max-width: 100vw;
+  height: 100vh;
 }
 .btn {
   padding: 0 15px;
@@ -51,15 +52,14 @@ header {
   width: 100%;
 }
 
-.outputWindow {
-  width: 50%;
-}
 .langHead {
-  padding: 10px 0 0 15px;
+  padding-left: 15px;
   font-size: 12px;
   font-weight: lighter;
   color: white;
-  height: 35px;
+  display: flex;
+  align-items: center;
+  height: 6vh;
   width: 70px;
   background-color: rgb(36 41 46);
 }
@@ -102,11 +102,35 @@ header {
 
 .codeEditor {
   padding: 10px;
+  height: 100%;
 }
 .editor-window {
   border-right: 1px grey solid;
   width: 50%;
+  height: 100%;
+}
+.outputWindow {
+  width: 50%;
+  height: 100%;
 }
 .outputDisplay {
   width: 50%;
+  height: 100%;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgb(51, 51, 52);
 }
