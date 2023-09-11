@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const directoryPath =
-  'C:/Users/ASUS PC/OneDrive/Desktop/extraCODESSS/CodeGlitch/server'; // Replace with the actual directory path
+const directoryPath = __dirname; // Replace with the actual directory path
 
 const deleteClass = () => {
   fs.readdir(directoryPath, (err, files) => {

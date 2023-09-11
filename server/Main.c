@@ -1,3 +1,6 @@
-var a = 10;
-var b = 80;
-console.log(a+b)
+#include <stdio.h>
+using namespace std;
+int main() {
+    printf("Hello World!");
+    return 0;
+}

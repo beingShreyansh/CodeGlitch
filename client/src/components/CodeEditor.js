@@ -1,46 +1,67 @@
-import React from 'react';
-import AceEditor from 'react-ace';
+import React, { useState, useEffect } from 'react';
+import MonacoEditor from '@monaco-editor/react';
 
-import 'ace-builds/src-noconflict/mode-c_cpp';
-import 'ace-builds/src-noconflict/mode-java';
-import 'ace-builds/src-noconflict/mode-python';
-import 'ace-builds/src-noconflict/theme-monokai';
-import 'ace-builds/src-noconflict/theme-github_dark';
-import 'ace-builds/src-noconflict/theme-github';
-import 'ace-builds/src-noconflict/ext-inline_autocomplete';
+// Code snippets for different languages
+const codeSnippets = {
+  java: `public class Main {\n  public static void main(String[] args) {\n    System.out.println("hello code"); \n\t// Your Java code here\n  }\n}`,
+  python: `print("Hello World")`,
+  javascript: `console.log("Hello World")`,
+  js: `console.log("Hello World")`,
+  cpp: `#include <iostream>\nusing namespace std;\nint main() {\n    cout << "Hello World!";\n    return 0;\n}`,
+  c: `#include <stdio.h>\nusing namespace std;\nint main() {\n    printf("Hello World!");\n    return 0;\n}`,
+};
 
-const CodeEditor = ({ value, onChange }) => {
-  // const [theme, setTheme] = useState('github_dak');
-  // const handleTheme = () => {};
+const CodeEditor = ({ value, onChange, language }) => {
+  const [editorCode, setEditorCode] = useState(value || codeSnippets[language]);
+  if (language === 'js') {
+    language = 'javascript';
+  }
+  useEffect(() => {
+    // Update the editor code when the language or value changes
+    setEditorCode(value || codeSnippets[language] || '');
+  }, [value, language]);
+
   const handleEditorChange = (newCode) => {
+    setEditorCode(newCode);
     onChange(newCode);
   };
 
   return (
-    <>
-      {/* <select>
-        <option value="github-dark">Dark</option>
-        <option value="github">Light</option>
-      </select> */}
-      <AceEditor
-        mode="java"
-        theme="github_dark"
-        value={value}
-        onChange={handleEditorChange}
-        name="code-editor"
-        fontSize={16}
-        editorProps={{ $blockScrolling: true }}
-        width="100%"
-        wrapEnabled
-        setOptions={{
-          enableBasicAutocompletion: true,
-          enableLiveAutocompletion: true,
-          enableSnippets: true,
-          showLineNumbers: true,
-          tabSize: 4,
-        }}
-      />
-    </>
+    <MonacoEditor
+      language={language}
+      theme="vs-dark"
+      loading="Loading..."
+      value={editorCode}
+      height="90vh"
+      onChange={handleEditorChange}
+      options={{
+        automaticLayout: true,
+        lineNumbers: true,
+        minimap: false,
+        colorDecorators: true,
+        colorDecoratorsActivatedOn: 'hover',
+        copyWithSyntaxHighlighting: 'true',
+        fontSize: 16,
+        wordWrap: 'on',
+        formatOnType: true,
+        autoClosingBrackets: true,
+        inlineSuggest: true,
+        codeLens: true,
+        cursorBlinking: 'smooth',
+        cursorStyle: 'line-thin',
+        quickSuggestions: true,
+        quickSuggestionsDelay: 1,
+        glyphMargin: true,
+        matchOnWordStartOnly: true,
+        multiCursorLimit: 10,
+        showDeprecated: true,
+        smoothScrolling: true,
+        showSnippets: true,
+        snippetsPreventQuickSuggestions: false,
+        showStatusBar: true,
+        suggest: 'showSnippets',
+      }}
+    />
   );
 };
 

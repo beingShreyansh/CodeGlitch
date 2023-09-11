@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
+
+header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding-top: 5px;
+  margin: 0px 0 0 150px;
+}
+
+.logo {
+  grid-area: 1 / 1 / 2 / 3;
+}
+.navBar {
+  grid-area: 1 / 4 / 2 / 6;
+}
+
+img.cgLogo {
+  width: 200px;
+}
+.navBar {
+  margin-top: 10px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+}
+li {
+  padding: 0 10px;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.login-btn {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  background: linear-gradient(287deg, #05d7e2 0%, #ff00fd 100%);
+  padding: 10px 30px;
+  border: solid #0066cc 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-radius: 8px 32px 12px;
+  transition: 425ms;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.login-btn:hover {
+  transition: 425ms;
+  padding: 10px 37px;
+  transform: translateY(-0px);
+  background: linear-gradient(287deg, #05d7e2 0%, #ff00fd 100%);
+  color: #ffffff;
+  border: solid 2px #0066cc;
+}
