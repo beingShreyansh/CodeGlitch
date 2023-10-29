@@ -1,0 +1,76 @@
+.Editor-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 100vw;
+}
+.editor-window {
+  border-right: rgb(48, 46, 46) 1px solid;
+}
+
+.output-Window,
+.editor-window {
+  box-shadow: 5px 12x 10px #fff;
+  width: 50%;
+  height: 100%;
+  margin: 10px 1px;
+  background-color: var(--bgcolor);
+}
+
+.options {
+  display: flex;
+  background-color: var(--forecolor);
+  height: 4vh;
+  padding: 10px;
+  gap: 5px;
+  font: 1em sans-serif;
+}
+.codeEditor {
+  width: 100%;
+}
+.options > div {
+  border-radius: 5px;
+  padding-right: 5px;
+}
+.langHead {
+  /* margin-right: 250px; */
+  padding-left: 15px;
+  font-size: 12px;
+  font-weight: lighter;
+  color: white;
+  display: flex;
+  align-items: center;
+  height: 6vh;
+  width: 63px;
+  background-color: var(--bgcolor);
+}
+.btn button {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+select {
+  padding: 2px;
+  border-radius: 10px;
+  outline: none;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(117, 115, 115, 0.3);
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(166, 63, 63, 0.3);
+  background-color: rgb(51, 51, 52);
+}

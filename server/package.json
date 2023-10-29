@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serever.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "compile-run": "^2.3.4",
+    "compilex": "^0.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ezcompilex": "^0.7.4",
+    "mongoose": "^7.6.3",
+    "peer": "^1.0.1",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2"
+  }
+}
