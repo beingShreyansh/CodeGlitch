@@ -1,0 +1,46 @@
+.main-container {
+  display: flex;
+  /* padding: 15px; */
+  gap: 5px;
+}
+
+.flex-container > div {
+  background: #ffecb3;
+  border: 3px solid #ffcc80;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.Editor-wrap {
+  flex: 1 1 auto;
+}
+
+.aside {
+  background: var(--forcolor);
+  height: 100px;
+  width: 100px;
+  padding: 16px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.asideInner {
+  flex: 1;
+}
+
+.clientsList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.client {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+}
+.userName {
+  margin-top: 10px;
+}

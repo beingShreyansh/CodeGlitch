@@ -1,0 +1,23 @@
+/* Add styles for the file list */
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Add styles for each file item */
+.file-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  /* Optional: Add hover effect */
+}
+
+/* Add styles for the file name */
+.file-item span {
+  color: white;
+  font-size: 16px;
+}
