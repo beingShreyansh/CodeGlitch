@@ -7,12 +7,14 @@ import FileList from './components/FileList.js';
 import About from './components/about.js';
 import Collab from './components/realtime/collab';
 import CollabHome from './components/realtime/collabHome.js';
+import Login from './components/login.js';
+import Register from './components/register.js';
 
 function App() {
   return (
     <div className="App">
       <div>
-        <Toaster
+        <Toaster  
           position="top-right"
           toastOptions={{
             success: {
@@ -31,6 +33,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
           <Route path="/files" element={<FileList />}></Route>
           <Route path="/code/:fileName" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>

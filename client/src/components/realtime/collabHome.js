@@ -4,6 +4,7 @@ import ACTIONS from '../../Actions';
 import Client from './components/client-avatar';
 import Navbar from '../navabar';
 import CollabEditor from './components/collabEditor';
+import axios from 'axios';
 import OutputDisplay from '../OutputDisplay';
 import { initSocket } from './socket';
 import {
@@ -11,6 +12,7 @@ import {
   useNavigate,
   Navigate,
   useParams,
+  Link,
 } from 'react-router-dom';
 
 import './styles/collabHome.css';
@@ -26,21 +28,44 @@ const EditorPage = () => {
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
 
+  const [inputValue, setInputValue] = useState('');
+
   const handleCompile = async () => {
     try {
-      const response = await fetch('http://localhost:5000/compile', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ code, selectedLanguage }),
+      const response = await axios.post('http://localhost:5000/compile', {
+        code,
+        selectedLanguage,
+        inputValue,
       });
-      const data = await response.json();
-
+      const data = response.data;
       setOutput(data.output);
     } catch (error) {
       console.error('Error compiling code:', error);
     }
+  };
+
+  const handleSave = async () => {
+    const fname = window.prompt('Please enter a filename');
+
+    try {
+      const response = await axios.post('http://localhost:5000/save', {
+        fileName: fname,
+        code,
+        selectedLanguage,
+      });
+      if (response) {
+        toast.success(`File saved`);
+      } else {
+        toast.error('Empty data feild');
+      }
+    } catch (error) {
+      console.error('Error Saving the code:', error);
+      toast.error('Empty data feild');
+    }
+  };
+
+  const handleInputChange = (newInput) => {
+    setInputValue(newInput);
   };
 
   const getHeadingText = () => {
@@ -125,9 +150,9 @@ const EditorPage = () => {
     reactNavigator('/collab');
   }
 
-  if (!location.state) {
-    return <Navigate to="/collab" />;
-  }
+  // if (!location.state) {
+  //   return <Navigate to="/collab" />;
+  // }
 
   return (
     <>
@@ -154,7 +179,7 @@ const EditorPage = () => {
               </button>
             </div>
           </div>
-          <div className="Editor-wrap">
+          {/* <div className="Editor-wrap">
             <div className="editor-window">
               <div className="options">
                 <div className="langHead">
@@ -201,6 +226,66 @@ const EditorPage = () => {
               </div>
               <div className="outputDisplay">
                 <OutputDisplay output={output} />
+              </div>
+            </div>
+          </div> */}
+          <div className="Editor-wrap">
+            <div className="editor-window">
+              <div className="options">
+                <div className="langHead">
+                  <h3>{getHeadingText()}</h3>
+                </div>
+                <div className="langSelect">
+                  <select
+                    id="languageSelect"
+                    value={selectedLanguage}
+                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                  >
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="js">JavaScript</option>
+                    <option value="c">C</option>
+                    <option value="cpp">C++</option>
+                  </select>
+                </div>
+                <div className="btn save">
+                  <button onClick={handleSave}>Save</button>
+                </div>
+                <div className="btn">
+                  <Link to="/files">
+                    <button onClick={Navigate('/files')}>View Files</button>
+                  </Link>
+                </div>
+                <div className="btn download">
+                  <button>Download</button>
+                </div>
+                <div className="btn">
+                  <button onClick={handleCompile}>Compile</button>
+                </div>
+              </div>
+
+              <div className="codeEditor">
+                <CollabEditor
+                  value={code}
+                  onChange={setCode}
+                  language={selectedLanguage}
+                  socketRef={socketRef}
+                  roomId={roomId}
+                />
+              </div>
+            </div>
+            <div className="output-Window">
+              <div className="options">
+                <div className="langHead">
+                  <h3> output : </h3>
+                </div>
+              </div>
+              <div className="outputDisplay">
+                <OutputDisplay
+                  output={output}
+                  input={inputValue}
+                  onInputChange={handleInputChange}
+                />
               </div>
             </div>
           </div>

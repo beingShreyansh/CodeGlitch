@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CodeEditor from './CodeEditor';
 import OutputDisplay from './OutputDisplay';
 import Navbar from './navabar';
 import './styles/home.css';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { Link, Navigate } from 'react-router-dom';
-// import { useAuth0 } from '@auth0/auth0-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState('python');
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
 
   const [inputValue, setInputValue] = useState('');
 
-  // const { isAuthenticated, user } = useAuth0();
-
-  // console.log(user, 'is user');
+  const navigate = useNavigate();
   const handleCompile = async () => {
     try {
       const response = await axios.post('http://localhost:5000/compile', {
@@ -33,27 +31,38 @@ function Home() {
   };
 
   const handleSave = async () => {
-    const fname = window.prompt('Please enter a filename');
+    if (isLogin) {
+      const fname = window.prompt('Please enter a filename');
 
-    try {
-      const response = await axios.post('http://localhost:5000/save', {
-        fileName: fname,
-        code,
-        selectedLanguage,
-      });
-      if (response) {
-        toast.success(`File saved`);
-      } else {
+      try {
+        const response = await axios.post('http://localhost:5000/save', {
+          fileName: fname,
+          code,
+          selectedLanguage,
+        });
+        if (response) {
+          toast.success(`File saved`);
+        } else {
+          toast.error('Empty data feild');
+        }
+      } catch (error) {
+        console.error('Error Saving the code:', error);
         toast.error('Empty data feild');
       }
-    } catch (error) {
-      console.error('Error Saving the code:', error);
-      toast.error('Empty data feild');
+    } else {
+      toast.error('User not logged in');
     }
   };
 
   const handleInputChange = (newInput) => {
     setInputValue(newInput);
+  };
+  const handleNavigate = () => {
+    if (isLogin) {
+      navigate('/files');
+    } else {
+      toast.error('User not logged in');
+    }
   };
 
   const getHeadingText = () => {
@@ -76,7 +85,7 @@ function Home() {
   return (
     <>
       <div className="App">
-        <Navbar />
+        <Navbar setIsLogin={setIsLogin} isLogin={isLogin} />
 
         <div className="Editor-wrap">
           <div className="editor-window">
@@ -100,10 +109,9 @@ function Home() {
               <div className="btn save">
                 <button onClick={handleSave}>Save</button>
               </div>
+
               <div className="btn">
-                <Link to="/files">
-                  <button onClick={Navigate('/files')}>View Files</button>
-                </Link>
+                <button onClick={handleNavigate}>View Files</button>
               </div>
               <div className="btn download">
                 <button>Download</button>

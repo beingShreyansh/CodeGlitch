@@ -1,10 +1,10 @@
+require('dotenv');
 const mongoose = require('mongoose');
-
+const URI =
+  'mongodb+srv://beingShreyansh:Shreyansh6881@compilerrr.8igkb8t.mongodb.net/codeGlitch?retryWrites=true&w=majority';
+// console.log(URI);
 const dbConnection = () => {
-  mongoose.connect(
-    'mongodb+srv://beingShreyansh:Shreyansh6881@compilerrr.8igkb8t.mongodb.net/?retryWrites=true&w=majority',
-    { useNewUrlParser: true }
-  );
+  mongoose.connect(URI, { useNewUrlParser: true });
 
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'MongoDB connection error:'));

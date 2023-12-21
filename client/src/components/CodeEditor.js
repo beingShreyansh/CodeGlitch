@@ -4,12 +4,12 @@ import { useParams } from 'react-router-dom';
 
 // Code snippets for different languages
 const codeSnippets = {
-  java: `public class Main {\n  public static void main(String[] args) {\n\tYour Java code here\n  }\n}`,
-  python: `# Write your Code here`,
-  javascript: `// Write your Code here  `,
-  js: `console.log("Hello World")`,
-  cpp: `#include <iostream>\nusing namespace std;\nint main() {\n\tcout << "Hello World!";\n\treturn 0;\n}`,
-  c: `#include <stdio.h>\nint main() {\n\tprintf("Hello World!");\n]treturn 0;\n}`,
+  java: `public class Main {\n\tpublic static void main(String[] args) {\n\t// Your Java code here!\n  }\n}`,
+  python: `# Write your Code here!`,
+  javascript: `// Write your Code here!`,
+  js: `// Write Your code here!`,
+  cpp: `#include <iostream>\nusing namespace std;\nint main() {\n\t// Write your Code!\n\treturn 0;\n}`,
+  c: `#include <stdio.h>\nint main() {\n\t// Write Your code!\n\treturn 0;\n}`,
 };
 
 const CodeEditor = ({ value, onChange, language }) => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './styles/fileList.css';
 
 const FileList = () => {
   const [files, setFiles] = useState([]);
@@ -17,7 +18,7 @@ const FileList = () => {
     };
 
     viewFiles();
-  }, []); 
+  }, []);
 
   const handleFileClick = async (files) => {
     try {
@@ -32,10 +33,26 @@ const FileList = () => {
   };
 
   return (
-    <div className="file-list">
+    // <div className="file-list">
+    //   {files.map((files) => (
+    //     <div key={files} onClick={handleFileClick}>
+    //       <font color="white">{files}</font>
+    //     </div>
+    //   ))}
+    // </div>
+
+    <div className="user-list">
       {files.map((files) => (
-        <div key={files} onClick={handleFileClick}>
-          <font color="white">{files}</font>
+        <div key={files} className="user-item">
+          <div className="user-info">
+            <span className="user-name">{files}</span>
+          </div>
+          <div className="user-actions">
+            <button className="open-button" onClick={handleFileClick}>
+              Open
+            </button>
+            <button className="delete-button">Delete</button>
+          </div>
         </div>
       ))}
     </div>

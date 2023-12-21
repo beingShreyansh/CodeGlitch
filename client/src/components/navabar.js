@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import logo from '../logo192.png';
 import './styles/navbar.css';
 import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-function Navbar() {
-  const navigate = useNavigate();
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+import toast from 'react-hot-toast';
 
+function Navbar({ setIsLogin, isLogin }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionStorage.getItem('token') != null) {
+      setIsLogin(true);
+      console.log(isLogin);
+    }
+  }, [isLogin]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    setIsLogin(false);
+    toast.success(`Logged out`);
+  };
   return (
     <>
       <header>
@@ -20,13 +33,6 @@ function Navbar() {
             <img src={logo} className="cgLogo" alt="logo" draggable="false" />
           </a>
         </div>
-        {isAuthenticated && (
-          <div>
-            <h2>{user.nickname}</h2>
-            <p>{user.email}</p>
-            {console.log(user)}
-          </div>
-        )}
         <div className="navBar">
           <ul>
             <li>
@@ -52,25 +58,23 @@ function Navbar() {
                 About
               </a>
             </li>
-            {isAuthenticated ? (
-              <li>
+            <li>
+              {!isLogin && (
                 <button
                   className="login-btn"
-                  onClick={() => logout({ returnTo: window.location.origin })}
-                >
-                  Log Out
-                </button>
-              </li>
-            ) : (
-              <li>
-                <button
-                  className="login-btn"
-                  onClick={() => loginWithRedirect()}
+                  onClick={() => {
+                    navigate('/login');
+                  }}
                 >
                   Log In
                 </button>
-              </li>
-            )}
+              )}
+              {isLogin && (
+                <button className="login-btn" onClick={handleLogout}>
+                  Log out
+                </button>
+              )}
+            </li>
           </ul>
         </div>
       </header>

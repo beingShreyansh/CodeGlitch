@@ -6,12 +6,12 @@ const ACTIONS = require('../client/src/Actions');
 const http = require('http');
 
 const dbConnection = require('./config/config');
-const { Code } = require('./config/model');
+const { Code } = require('./config/model.js');
 
 dbConnection();
 
-const compileRun = require('compile-run');
-const { c, cpp, node, python, java } = require('compile-run');
+const { registerUser, loginUser } = require('./controller/userController');
+const { saveCode, compileCode } = require('./controller/codeController');
 
 const PORT = process.env.PORT || 5000;
 
@@ -22,23 +22,10 @@ const io = new Server(server);
 app.use(cors());
 app.use(express.json());
 
-app.post('/save', async (req, res) => {
-  const { fileName, code, selectedLanguage } = req.body;
+app.post('/register', registerUser);
+app.post('/login', loginUser);
 
-  if (!fileName || !code || fileName.trim() === '' || code.trim === '') {
-    res.status(400).json({ error: 'Invalid filename' });
-    return;
-  }
-
-  const newCode = new Code({
-    fileName,
-    code,
-    language: selectedLanguage,
-  });
-
-  await newCode.save();
-  res.json({ success: true });
-});
+app.post('/save', saveCode);
 
 app.get('/files', async (req, res) => {
   const files = await Code.find({}, { fileName: 1 }).select('fileName');
@@ -105,31 +92,6 @@ io.on('connection', (socket) => {
 
 ExpressPeerServer(server, { path: '/' });
 
-app.post('/compile', async (req, res) => {
-  const { code, selectedLanguage, inputValue } = req.body;
-  let output = '';
-
-  try {
-    if (selectedLanguage === 'python') {
-      output = await python.runSource(code, inputValue);
-    } else if (selectedLanguage === 'java') {
-      output = await java.runSource(code, inputValue);
-    } else if (selectedLanguage === 'c') {
-      output = await c.runSource(code, inputValue);
-    } else if (selectedLanguage === 'cpp') {
-      output = await cpp.runSource(code, inputValue);
-    } else if (selectedLanguage === 'js') {
-      output = await node.runSource(code, inputValue);
-    }
-
-    if (output.stderr) {
-      res.status(200).json({ output: output.stderr });
-    } else {
-      res.status(200).json({ output: output.stdout });
-    }
-  } catch (error) {
-    output = error.message;
-  }
-});
+app.post('/compile', compileCode);
 
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}.`));
