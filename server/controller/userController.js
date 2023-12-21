@@ -38,10 +38,9 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  console.log('hii', email, password);
   const user = await User.findOne({ email });
   if (!user) {
-    res.status(500).json({ message: 'user not found' });
+    res.status(401).send('user not found');
   }
   if (user && user.matchPassword(password)) {
     res.status(201).json({
@@ -50,7 +49,7 @@ const loginUser = async (req, res) => {
       token: generateToken(user._id),
     });
   }
-  res.status(500);
+  res.status(402);
 };
 
 module.exports = { registerUser, loginUser };

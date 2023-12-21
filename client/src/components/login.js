@@ -19,11 +19,14 @@ const Login = () => {
       });
       sessionStorage.setItem('token', response.data.token);
       sessionStorage.setItem('user', response.data.email);
+      console.log(response.status);
+      if (response.status === 401) {
+        toast.success(`User not found`);
+      }
       if (response.status === 201) {
         console.log('Done');
         navigate('/');
         toast.success(`Logged in`);
-
       }
       console.log(response.data);
     } catch (error) {

@@ -13,6 +13,7 @@ const Collab = () => {
   const [roomId, setRoomId] = useState('');
   const [username, setUsername] = useState('');
   const [creditCard, setCreditCard] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
 
   const generateRandomNumber = () => {
     let randomNumber = '';
@@ -74,7 +75,7 @@ const Collab = () => {
   return (
     <div className="homePageWrapper">
       <HeadInfo title="Code Glitch - Collab" />
-      <Navbar />
+      <Navbar setIsLogin={setIsLogin} isLogin={isLogin} />
       <div className="center">
         <div className="formWrapper">
           <img className="homePageLogo" src={logo} alt="code-glith" />
