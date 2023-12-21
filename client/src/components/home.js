@@ -6,6 +6,7 @@ import './styles/home.css';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { saveAs } from 'file-saver';
 
 function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState('python');
@@ -16,6 +17,7 @@ function Home() {
   const [inputValue, setInputValue] = useState('');
 
   const navigate = useNavigate();
+
   const handleCompile = async () => {
     try {
       const response = await axios.post('http://localhost:5000/compile', {
@@ -60,6 +62,16 @@ function Home() {
   const handleNavigate = () => {
     if (isLogin) {
       navigate('/files');
+    } else {
+      toast.error('User not logged in');
+    }
+  };
+
+  const handleDownload = () => {
+    if (isLogin) {
+      const blob = new Blob([code], { type: 'text/plain' });
+      const fileName = getHeadingText(); // Use the code file name based on the selected language
+      saveAs(blob, fileName);
     } else {
       toast.error('User not logged in');
     }
@@ -114,7 +126,7 @@ function Home() {
                 <button onClick={handleNavigate}>View Files</button>
               </div>
               <div className="btn download">
-                <button>Download</button>
+                <button onClick={handleDownload}>Download</button>
               </div>
               <div className="btn">
                 <button onClick={handleCompile}>Compile</button>
